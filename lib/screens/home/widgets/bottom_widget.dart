@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:take_it_and_go/core/constants.dart';
 
 class BottomWidget extends StatelessWidget {
-  const BottomWidget({
-    Key? key,
-  }) : super(key: key);
+  const BottomWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      unselectedLabelStyle: const TextStyle(color: kBlackColor),
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'HOME'),
         BottomNavigationBarItem(

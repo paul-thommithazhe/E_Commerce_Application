@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:take_it_and_go/screens/home/widgets/bottom_widget.dart';
+import 'package:take_it_and_go/screens/home/widgets/drawer.dart';
 import 'package:take_it_and_go/screens/home/widgets/head_lining_brands.dart';
 import 'package:take_it_and_go/screens/home/widgets/main_banner_image.dart';
 import 'package:take_it_and_go/screens/home/widgets/most_loved_brands.dart';
@@ -13,12 +14,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const DrawerHomePage(),
       appBar: AppBar(
         centerTitle: true,
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.menu),
-        ),
         title: const Text(
           'Take it & go',
           style: TextStyle(
@@ -41,7 +39,7 @@ class HomeScreen extends StatelessWidget {
           const MainBannerImage(),
           //headlining brands
           HeadLiningBrands(),
-          //most loved brands 
+          //most loved brands
           MostLovedBrands()
         ],
       ),

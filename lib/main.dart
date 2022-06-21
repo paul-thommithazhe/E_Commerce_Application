@@ -26,10 +26,15 @@ class MyApp extends StatelessWidget {
         ),
         iconTheme: const IconThemeData(color: kBlackColor),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-            unselectedItemColor: kBlackColor,
-            selectedItemColor: kBlackColor,
-            selectedLabelStyle:
-                TextStyle(fontWeight: FontWeight.w500, fontSize: 10)),
+          unselectedItemColor: kBlackColor,
+          selectedItemColor: kButtonandBorderColors,
+          selectedLabelStyle: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 10,
+              color: kButtonandBorderColors),
+          unselectedLabelStyle: TextStyle(
+              fontWeight: FontWeight.w500, fontSize: 9, color: kBlackColor),
+        ),
         primaryColor: kPrimaryColor,
       ),
       debugShowCheckedModeBanner: false,

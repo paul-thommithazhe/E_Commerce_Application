@@ -1,32 +1,22 @@
 name: take_it_and_go
 description: A new Flutter project.
 
-
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-
 
 version: 1.0.0+1
 
 environment:
   sdk: ">=2.17.3 <3.0.0"
 
-#depedencies for development 
-
+#depedencies for development
 dependencies:
+  carousel_slider: ^4.1.1
+  cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
 
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-
-
-# development depedencies for development 
-
+# development depedencies for development
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -34,10 +24,11 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -46,30 +37,19 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  #assets files 
+  #assets files
   assets:
     - assets/images/
   #   - images/a_dot_ham.jpeg
-
-  
-
-  
-
-  # adding fonts 
-
+  # adding fonts
   # example:
-
- 
   fonts:
 
-    # appbar main title font 
-
+    # appbar main title font
     - family: Dancing Script
       fonts:
         - asset: fonts/DancingScript-Bold.ttf
           weight: 900
-
-      
     # - family: Schyler
     #   fonts:
     #     - asset: fonts/Schyler-Regular.ttf
@@ -80,10 +60,4 @@ flutter:
     #     - asset: fonts/TrajanPro.ttf
     #     - asset: fonts/TrajanPro_Bold.ttf
     #       weight: 700
-
-  
-
-   
-  
-  
   # see https://flutter.dev/custom-fonts/#from-packages
