@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:take_it_and_go/core/constants.dart';
-import 'package:take_it_and_go/screens/home/home.dart';
+import 'package:take_it_and_go/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,20 +25,10 @@ class MyApp extends StatelessWidget {
           subtitle1: TextStyle(color: kBlackColor),
         ),
         iconTheme: const IconThemeData(color: kBlackColor),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          unselectedItemColor: kBlackColor,
-          selectedItemColor: kButtonandBorderColors,
-          selectedLabelStyle: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 10,
-              color: kButtonandBorderColors),
-          unselectedLabelStyle: TextStyle(
-              fontWeight: FontWeight.w500, fontSize: 9, color: kBlackColor),
-        ),
         primaryColor: kPrimaryColor,
       ),
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      home: Home(),
     );
   }
 }

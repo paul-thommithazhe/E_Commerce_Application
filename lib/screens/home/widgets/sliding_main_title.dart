@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:take_it_and_go/core/constants.dart';
+import 'package:take_it_and_go/widgets/list_of_product.dart';
 
 // horizontal sliding image with title of the category of the products
 
@@ -18,7 +19,16 @@ class SlidingMainTitle extends StatelessWidget {
         },
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ListOfProdcutScreen(
+                    categoryTitle: 'Shirts',
+                  ),
+                ),
+              );
+            },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -29,7 +39,7 @@ class SlidingMainTitle extends StatelessWidget {
                     top: 8.0,
                     bottom: 8.0,
                     left: 10,
-                    right:0,
+                    right: 0,
                   ),
                   child: Container(
                     width: 65,
