@@ -26,7 +26,7 @@ class CartScreen extends StatelessWidget {
                 )
               ]),
         ),
-        CartItem()
+        const CartItem()
       ]),
     );
   }

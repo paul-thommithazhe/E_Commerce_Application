@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:take_it_and_go/core/constants.dart';
+import 'package:take_it_and_go/home.dart';
 import 'package:take_it_and_go/screens/home/widgets/row_product_widget.dart';
 import 'package:take_it_and_go/widgets/icon_button.dart';
 
 class ListOfProdcutScreen extends StatelessWidget {
-  ListOfProdcutScreen({Key? key, required this.categoryTitle})
+  const ListOfProdcutScreen({Key? key, required this.categoryTitle})
       : super(key: key);
-  String categoryTitle;
+  final String categoryTitle;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.1,
         leading: IconButtons(
           icon: Icons.arrow_back,
-          buttonFunction: () {},
+          buttonFunction: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Home()));
+          },
         ),
         title: Text(
           categoryTitle,
@@ -56,8 +61,8 @@ class ListOfProdcutScreen extends StatelessWidget {
                     ),
                     const VerticalDivider(
                       indent: 10,
-                      endIndent: 5,
-                      thickness: 2,
+                      endIndent: 10,
+                      thickness: 0.5,
                       color: Colors.grey,
                     ),
                     Row(
