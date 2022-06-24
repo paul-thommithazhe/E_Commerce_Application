@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:take_it_and_go/core/constants.dart';
 import 'package:take_it_and_go/screens/cart/widgets/item_name_and_description.dart';
-import 'package:take_it_and_go/widgets/icon_button.dart';
 
 class CartItem extends StatelessWidget {
   const CartItem({Key? key}) : super(key: key);
@@ -11,7 +10,7 @@ class CartItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        padding: EdgeInsets.only(top: 15),
+        padding: const EdgeInsets.only(top: 15),
         height: 180,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -24,14 +23,13 @@ class CartItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 90,
-                  width: 90,
-                  child: Image.asset(
-                    'assets/images/images.jpeg',
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                const SizedBox(
+                    height: 90,
+                    width: 90,
+                    child: Image(
+                      image: NetworkImage(
+                          'https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/1364628/2016/8/31/11472636737718-Roadster-Men-Blue-Regular-Fit-Printed-Casual-Shirt-6121472636737160-1.jpg'),
+                    )),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

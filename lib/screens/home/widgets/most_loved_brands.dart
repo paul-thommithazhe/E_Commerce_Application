@@ -8,7 +8,6 @@ class MostLovedBrands extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return SizedBox(
       // height: 150,
       child: Column(
@@ -19,27 +18,29 @@ class MostLovedBrands extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 12.0),
             child: Text(
               'MOST LOVED BRANDS',
-              style: TextStyle(color: kBlackColor,fontWeight: FontWeight.w900,fontSize: 20),
+              style: TextStyle(
+                  color: kBlackColor,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 20),
             ),
           ),
           kHeight10,
           CarouselSlider(
             options: CarouselOptions(
               autoPlay: true,
-              autoPlayAnimationDuration:const Duration(seconds: 2),
-              height: 100.0,
+              autoPlayAnimationDuration: const Duration(seconds: 2),
+              height: 400.0,
             ),
             items: [1, 2, 3, 4, 5].map((i) {
               return Builder(
                 builder: (BuildContext context) {
                   return Container(
-                    width: 100,
-                    margin: const EdgeInsets.symmetric(horizontal: 1.0),
+                    width: 300,
                     decoration: const BoxDecoration(
                       color: Colors.amber,
                       image: DecorationImage(
                           image: AssetImage('assets/images/blackberrys.webp'),
-                          fit: BoxFit.contain),
+                          fit: BoxFit.fill),
                     ),
                   );
                 },

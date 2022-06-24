@@ -46,15 +46,24 @@ class WishListScreen extends StatelessWidget {
             ),
           ),
           Center(
-            child: Container(
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                border: Border.all(color: kButtonandBorderColors),
-              ),
-              child: const Text(
-                'Shop Now',
-                style: TextStyle(
-                    color: kButtonandBorderColors, fontWeight: FontWeight.bold),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Home()),
+                );
+              },
+              child: Container(
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  border: Border.all(color: kButtonandBorderColors),
+                ),
+                child: const Text(
+                  'Shop Now',
+                  style: TextStyle(
+                      color: kButtonandBorderColors,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             ),
           ),

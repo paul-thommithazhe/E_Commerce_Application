@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:take_it_and_go/core/constants.dart';
+import 'package:take_it_and_go/home.dart';
 import 'package:take_it_and_go/screens/cart/widgets/cart_item.dart';
 import 'package:take_it_and_go/screens/cart/widgets/user_address_screen.dart';
 import 'package:take_it_and_go/widgets/icon_button.dart';
@@ -12,8 +13,18 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
-        leading: IconButtons(buttonFunction: () {}, icon: Icons.arrow_back),
-        title: const Text('Shopping Bag'),
+        leading: IconButtons(
+            buttonFunction: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Home()),
+              );
+            },
+            icon: Icons.arrow_back),
+        title: const Text(
+          'SHOPPING BAG',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+        ),
       ),
       body: Column(
         children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:take_it_and_go/core/constants.dart';
+import 'package:take_it_and_go/widgets/icon_button.dart';
 
 class ListItem extends StatelessWidget {
   const ListItem({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class ListItem extends StatelessWidget {
         children: [
           GestureDetector(
             //navigating to product detailed page
-
+      
             onTap: () {
               print('tapped');
             },
@@ -30,24 +31,33 @@ class ListItem extends StatelessWidget {
               ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
-                'Louis Philippe',
-                style: TextStyle(color: kBlackColor),
-              ),
-              // IconButtons(buttonFunction: () {}, icon: Icons.favorite_outline)
-            ],
+        ListTile(
+          title: Text('Louis Philippe'),
+          subtitle: Text('Men Slim Fit Casual Shirt'),
+          trailing: IconButtons(
+            buttonFunction: () {},
+            icon: Icons.favorite_outline,
           ),
-          const Text(
-            'Men Slim Fit Casual Shirt',
-            style: TextStyle(color: Colors.grey, fontSize: 12),
-          ),
-          const Text(
-            '₹ 2,399',
-            style: TextStyle(color: kBlackColor),
-          )
+        ),
+      
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: const [
+          //     Text(
+          //       'Louis Philippe',
+          //       style: TextStyle(color: kBlackColor),
+          //     ),
+          //     // IconButtons(buttonFunction: () {}, icon: Icons.favorite_outline)
+          //   ],
+          // ),
+          // const Text(
+          //   'Men Slim Fit Casual Shirt',
+          //   style: TextStyle(color: Colors.grey, fontSize: 12),
+          // ),
+          // const Text(
+          //   '₹ 2,399',
+          //   style: TextStyle(color: kBlackColor),
+          // )
         ],
       ),
     );
