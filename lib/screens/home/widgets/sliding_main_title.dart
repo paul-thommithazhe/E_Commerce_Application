@@ -17,6 +17,14 @@ class SlidingMainTitle extends StatelessWidget {
     'Kurtas',
     'Blazzers',
   ];
+  List<String> slidingImages = [
+    'image1.jpeg',
+    'image2.jpeg',
+    'image3.jpeg',
+    'image4.jpeg',
+    'image5.jpeg',
+    'image6.jpeg'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -54,14 +62,15 @@ class SlidingMainTitle extends StatelessWidget {
                     width: 65,
                     height: 65,
                     decoration: BoxDecoration(
-                      image: const DecorationImage(
-                        image: AssetImage('assets/images/images.jpeg'),
+                      image: DecorationImage(
+                        image:
+                            AssetImage('assets/images/${slidingImages[index]}'),
                         fit: BoxFit.cover,
                       ),
                       color: Colors.grey,
                       borderRadius: BorderRadius.circular(50),
-                      border:
-                          Border.all(color: kButtonandBorderColors, width: 1.6),
+                      // border:
+                      //     Border.all(color: kButtonandBorderColors, width: 1.6),
                     ),
                   ),
                 ),
