@@ -35,6 +35,7 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: index == 3
           ? null
           : BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
               onTap: (int pageIndex) {
                 setState(() {
                   index = pageIndex;

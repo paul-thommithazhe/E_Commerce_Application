@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:take_it_and_go/core/constants.dart';
-import 'package:take_it_and_go/screens/cart/cart.dart';
 import 'package:take_it_and_go/screens/home/widgets/drawer.dart';
 import 'package:take_it_and_go/screens/home/widgets/head_lining_brands.dart';
 import 'package:take_it_and_go/screens/home/widgets/main_banner_image.dart';
-import 'package:take_it_and_go/screens/home/widgets/main_logo.dart';
 import 'package:take_it_and_go/screens/home/widgets/most_loved_brands.dart';
 import 'package:take_it_and_go/screens/home/widgets/sliding_main_title.dart';
 import 'package:take_it_and_go/screens/search/search_screen.dart';
-import 'package:take_it_and_go/screens/wishlist/wishlist.dart';
 import 'package:take_it_and_go/widgets/icon_button.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -21,13 +17,13 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.5,
         centerTitle: true,
-        title: const Text(
-          'Take it & Go',
-          style: TextStyle(
-              fontWeight: FontWeight.w900,
-              fontSize: 24,
-              fontFamily: 'Dancing Script'),
-        ),
+        // title: const Text(
+        //   'Take it & Go',
+        //   style: TextStyle(
+        //       fontWeight: FontWeight.w900,
+        //       fontSize: 24,
+        //     ),
+        // ),
         actions: [
           IconButtons(
             buttonFunction: () {
@@ -43,15 +39,15 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: ListView(
-        children: const [
+        children:  [
           //sliding categories
           SlidingMainTitle(),
           //main banner
-          MainBannerImage(),
+          const MainBannerImage(),
           //Headlining brands
-          HeadLiningBrands(),
+          const HeadLiningBrands(),
           //most loved brands
-          MostLovedBrands()
+           MostLovedBrands()
         ],
       ),
     );

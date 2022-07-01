@@ -15,10 +15,7 @@ class CartScreen extends StatelessWidget {
         elevation: 1,
         leading: IconButtons(
             buttonFunction: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Home()),
-              );
+              Navigator.pop(context);
             },
             icon: Icons.arrow_back),
         title: const Text(
@@ -63,31 +60,38 @@ class CartScreen extends StatelessWidget {
             ),
           ),
           Container(
-            color: Colors.grey.shade400,
-            child: Stack(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const Text(
-                      '₹ 807.00',
-                      style: TextStyle(color: kBlackColor),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const UserAddressScreen()),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                          primary: kButtonandBorderColors),
-                      child: const Text('PROCEED TO PAYMENT'),
-                    )
-                  ],
-                )
-              ],
+            height: 60,
+            color: const Color.fromARGB(255, 246, 244, 244),
+            child: Center(
+              child: Stack(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const Text(
+                        '₹ 807.00',
+                        style: TextStyle(
+                            color: kBlackColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const UserAddressScreen()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                            primary: kButtonandBorderColors),
+                        child: const Text('PROCEED TO PAYMENT'),
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
           )
         ],

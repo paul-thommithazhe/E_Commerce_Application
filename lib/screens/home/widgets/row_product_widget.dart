@@ -13,7 +13,7 @@ class RowProductWidget extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children:  [
+      children: const [
         ListItem(),
         ListItem(),
       ],

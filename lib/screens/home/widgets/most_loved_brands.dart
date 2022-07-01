@@ -4,7 +4,15 @@ import 'package:take_it_and_go/core/constants.dart';
 // most loved brands banner images
 
 class MostLovedBrands extends StatelessWidget {
-  const MostLovedBrands({Key? key}) : super(key: key);
+  MostLovedBrands({Key? key}) : super(key: key);
+
+  // list of most loved brands banner images
+
+  final List<String> bannerImagesName = [
+    'assets/images/denimMen_banner.jpeg',
+    'assets/images/shirtwear.jpeg',
+    'assets/images/workWearMen.jpeg'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -29,18 +37,18 @@ class MostLovedBrands extends StatelessWidget {
             options: CarouselOptions(
               autoPlay: true,
               autoPlayAnimationDuration: const Duration(seconds: 2),
-              height: 400.0,
+              height: 200.0,
             ),
-            items: [1, 2, 3, 4, 5].map((i) {
+            items: [1, 2, 3].map((i) {
               return Builder(
                 builder: (BuildContext context) {
                   return Container(
                     width: 300,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Colors.amber,
                       image: DecorationImage(
-                          image: AssetImage('assets/images/blackberrys.webp'),
-                          fit: BoxFit.fill),
+                          image: AssetImage(bannerImagesName[i - 1]),
+                          fit: BoxFit.fitWidth),
                     ),
                   );
                 },
@@ -52,17 +60,3 @@ class MostLovedBrands extends StatelessWidget {
     );
   }
 }
-
-// class LovedBrandsBanner extends StatelessWidget {
-//   const LovedBrandsBanner({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final size = MediaQuery.of(context).size;
-//     return Container(
-//       width: size.width,
-//       decoration:
-//           const BoxDecoration(image: DecorationImage(image: NetworkImage(''))),
-//     );
-//   }
-// }

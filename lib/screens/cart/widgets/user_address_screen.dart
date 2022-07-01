@@ -79,30 +79,33 @@ class UserAddressScreen extends StatelessWidget {
           ),
           Container(
             height: 60,
-            color: Colors.grey.shade400,
-            child: Stack(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const PaymentScreen()),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: kButtonandBorderColors,
-                        fixedSize: Size(size.width - 20, 30),
+            color:  Color.fromARGB(255, 246, 244, 244),
+            child: Center(
+              child: Stack(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            //payment screen
+                            MaterialPageRoute(
+                                builder: (context) => const PaymentScreen()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: kButtonandBorderColors,
+                          fixedSize: Size(size.width - 20, 30),
+                        ),
+                        child: const Text('ADD ADDRESS',style: TextStyle(fontSize: 16),),
                       ),
-                      child: const Text('ADD ADDRESS'),
-                    ),
-                  ],
-                )
-              ],
+                    ],
+                  )
+                ],
+              ),
             ),
           )
         ],

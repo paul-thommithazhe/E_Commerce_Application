@@ -5,26 +5,35 @@ import 'package:take_it_and_go/widgets/list_of_product.dart';
 // horizontal sliding image with title of the category of the products
 
 class SlidingMainTitle extends StatelessWidget {
-  const SlidingMainTitle({Key? key}) : super(key: key);
+  SlidingMainTitle({Key? key}) : super(key: key);
+
+  List<String> categoryNames = [
+    'Shirts',
+    'T-Shirts',
+    'Trousers',
+    'Jeans',
+    'Sports',
+    'Track Pants',
+    'Kurtas',
+    'Blazzers',
+  ];
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 110,
-      child: ListView.separated(
+      child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 10,
-        separatorBuilder: (context, index) {
-          return const SizedBox(width: 10);
-        },
+        itemCount: 6,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
+                  //navigating to list of product items ...(eg :- shirt to list of shirt items)
                   builder: (context) => ListOfProdcutScreen(
-                    categoryTitle: 'Shirts',
+                    categoryTitle: categoryNames[index],
                   ),
                 ),
               );
@@ -56,10 +65,10 @@ class SlidingMainTitle extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Text(
-                  'shirts',
-                  style: TextStyle(color: kBlackColor),
-                )
+                Text(
+                  categoryNames[index],
+                  style: const TextStyle(color: kBlackColor),
+                ),
               ],
             ),
           );

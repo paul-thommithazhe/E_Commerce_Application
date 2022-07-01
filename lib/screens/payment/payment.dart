@@ -36,7 +36,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       payment_method = value.toString();
                     });
                   },
-                  title: Text('Cash on Delivery'),
+                  title: const Text('Cash on Delivery'),
                 ),
                 RadioListTile(
                   value: 'Bhim UPI',
@@ -46,38 +46,46 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       payment_method = value.toString();
                     });
                   },
-                  title: Text('Bhim UPI'),
+                  title: const Text('Bhim UPI'),
                 ),
               ],
             ),
           ),
-         Container(
-            color: Colors.grey.shade400,
+          Container(
+            color: const Color.fromARGB(255, 246, 244, 244),
             height: 55,
-            child: Stack(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const Text(
-                      '₹ 807.00',
-                      style: TextStyle(color: kBlackColor,fontSize: 20,fontWeight: FontWeight.w700),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const PaymentSuccess()),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                          primary: kButtonandBorderColors,fixedSize: Size(160,40)),
-                      child: const Text('PAY NOW'),
-                    )
-                  ],
-                )
-              ],
+            child: Center(
+              child: Stack(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const Text(
+                        '₹ 807.00',
+                        style: TextStyle(
+                            color: kBlackColor,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            // if payment success it will direct to paymentsuccess page.........
+                            MaterialPageRoute(
+                                builder: (context) => const PaymentSuccess()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                            primary: kButtonandBorderColors,
+                            fixedSize: const Size(160, 25)),
+                        child: const Text('PAY NOW',
+                            style: TextStyle(fontSize: 16)),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           )
         ],
