@@ -3,6 +3,7 @@ import 'package:take_it_and_go/core/constants.dart';
 import 'package:take_it_and_go/home.dart';
 import 'package:take_it_and_go/screens/cart/widgets/cart_item.dart';
 import 'package:take_it_and_go/screens/cart/widgets/user_address_screen.dart';
+import 'package:take_it_and_go/screens/coupon/coupon.dart';
 import 'package:take_it_and_go/widgets/icon_button.dart';
 
 class CartScreen extends StatelessWidget {
@@ -35,7 +36,8 @@ class CartScreen extends StatelessWidget {
                   height: 38,
                   decoration: BoxDecoration(
                     color: Colors.grey.shade400,
-                    border: Border.all(color: Colors.grey),
+                    border:
+                        Border.all(color: Color.fromARGB(255, 214, 206, 206)),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -44,7 +46,7 @@ class CartScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const Text(
-                            '1 ITEM SELECTED (807)',
+                            '1 ITEMS SELECTED (807)',
                             style: TextStyle(color: kBlackColor),
                           ),
                           IconButton(
@@ -56,6 +58,32 @@ class CartScreen extends StatelessWidget {
                 ),
 
                 const CartItem(),
+                const Divider(thickness: 4),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                      child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'APPLY COUPON',
+                        style: TextStyle(
+                          color: kBlackColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      IconButtons(
+                          buttonFunction: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CouponScreen()));
+                          },
+                          icon: Icons.arrow_circle_right)
+                    ],
+                  )),
+                )
               ],
             ),
           ),

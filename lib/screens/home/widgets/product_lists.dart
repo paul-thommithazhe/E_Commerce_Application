@@ -22,11 +22,11 @@ class ListItem extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>  ProductDetailedScreen()));
+                      builder: (context) => ProductDetailedScreen()));
             },
             child: Container(
-              height: 190,
-              width: size.width / 2.4,
+              height: 220,
+              width: size.width / 2.2,
               decoration: const BoxDecoration(
                 color: Colors.grey,
                 image: DecorationImage(
@@ -35,15 +35,6 @@ class ListItem extends StatelessWidget {
               ),
             ),
           ),
-          // ListTile(
-          //   title: const Text('Louis Philippe'),
-          //   subtitle: const Text('Men Slim Fit Casual Shirt'),
-          //   trailing: IconButtons(
-          //     buttonFunction: () {},
-          //     icon: Icons.favorite_outline,
-          //   ),
-          // ),
-
           SizedBox(
             height: 25,
             child: Row(
@@ -57,10 +48,12 @@ class ListItem extends StatelessWidget {
                 kWidth20,
                 IconButtons(
                   buttonFunction: () {},
-                  icon: Icons.favorite_outline,
+                  icon: Icons.favorite,
+                  
                   iconButtonSize: 15,
                   size: 22,
                   paddingSize: 0,
+                  buttonColor: kGreyColor,
                 )
               ],
             ),

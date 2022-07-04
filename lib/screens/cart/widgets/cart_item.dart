@@ -14,7 +14,7 @@ class CartItem extends StatelessWidget {
         height: 180,
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color: Colors.grey),
+          border: Border.all(color: Color.fromARGB(255, 230, 223, 223)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -72,7 +72,7 @@ class CartItem extends StatelessWidget {
             ),
             const Divider(
               thickness: 1,
-              color: Colors.grey,
+              color: Color.fromARGB(255, 222, 214, 214),
             ),
             Padding(
               padding: const EdgeInsets.only(right: 15.0, top: 8.0),
@@ -83,6 +83,7 @@ class CartItem extends StatelessWidget {
                 ),
               ),
             ),
+           
           ],
         ),
       ),

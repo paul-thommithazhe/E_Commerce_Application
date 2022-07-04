@@ -44,6 +44,7 @@ class ListOfProdcutScreen extends StatelessWidget {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: ListView(
@@ -70,6 +71,7 @@ class ListOfProdcutScreen extends StatelessWidget {
                         IconButtons(
                           buttonFunction: () {},
                           icon: Icons.filter_alt,
+                          buttonColor: const Color.fromARGB(255, 145, 141, 141),
                         ),
                         const Text(
                           'Sort',
@@ -86,9 +88,10 @@ class ListOfProdcutScreen extends StatelessWidget {
                     Row(
                       children: [
                         IconButtons(
-                          buttonFunction: () {},
-                          icon: Icons.swap_vert,
-                        ),
+                            buttonFunction: () {},
+                            icon: Icons.swap_vert,
+                            buttonColor:
+                                const Color.fromARGB(255, 145, 141, 141)),
                         const Text(
                           'Filter',
                           style: TextStyle(color: kBlackColor),

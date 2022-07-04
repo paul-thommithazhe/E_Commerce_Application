@@ -25,17 +25,21 @@ class UserAddressScreen extends StatelessWidget {
                 const DividerHeadline(
                   dividerHeadLine: 'CONTACT DETAILS',
                 ),
-                const InputTextFormField(
+                InputTextFormField(
                   hintTitle: 'Name*',
                 ),
-                const InputTextFormField(
+                InputTextFormField(
                   hintTitle: 'Mobile No*',
+                  textInputType: TextInputType.phone,
                 ),
                 const DividerHeadline(dividerHeadLine: 'ADDRESS'),
-                const InputTextFormField(hintTitle: 'Pin Code*'),
-                const InputTextFormField(
+                InputTextFormField(
+                  hintTitle: 'Pin Code*',
+                  textInputType: TextInputType.number,
+                ),
+                InputTextFormField(
                     hintTitle: 'Address (House No.Building,Street,Area *'),
-                const InputTextFormField(hintTitle: 'Locality/Town*'),
+                InputTextFormField(hintTitle: 'Locality/Town*'),
                 const DividerHeadline(dividerHeadLine: 'SAVE ADDRESS AS'),
                 kHeight10,
                 Row(
@@ -79,7 +83,7 @@ class UserAddressScreen extends StatelessWidget {
           ),
           Container(
             height: 60,
-            color:  Color.fromARGB(255, 246, 244, 244),
+            color: Color.fromARGB(255, 246, 244, 244),
             child: Center(
               child: Stack(
                 children: [
@@ -100,7 +104,10 @@ class UserAddressScreen extends StatelessWidget {
                           primary: kButtonandBorderColors,
                           fixedSize: Size(size.width - 20, 30),
                         ),
-                        child: const Text('ADD ADDRESS',style: TextStyle(fontSize: 16),),
+                        child: const Text(
+                          'ADD ADDRESS',
+                          style: TextStyle(fontSize: 16),
+                        ),
                       ),
                     ],
                   )
@@ -134,14 +141,24 @@ class DividerHeadline extends StatelessWidget {
 }
 
 class InputTextFormField extends StatelessWidget {
-  const InputTextFormField({Key? key, required this.hintTitle})
+  InputTextFormField(
+      {Key? key,
+      required this.hintTitle,
+      this.textInputType = TextInputType.name,
+      this.paddingHorizontal = 12.0,
+      this.paddingVertical = 8.0})
       : super(key: key);
   final String hintTitle;
+  TextInputType textInputType;
+  double paddingHorizontal;
+  double paddingVertical;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+      padding: EdgeInsets.symmetric(
+          horizontal: paddingHorizontal, vertical: paddingVertical),
       child: TextFormField(
+        keyboardType: textInputType,
         decoration: InputDecoration(
           hintText: hintTitle,
           border: const OutlineInputBorder(),

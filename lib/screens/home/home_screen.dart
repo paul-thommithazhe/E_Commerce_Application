@@ -17,13 +17,6 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.5,
         centerTitle: true,
-        // title: const Text(
-        //   'Take it & Go',
-        //   style: TextStyle(
-        //       fontWeight: FontWeight.w900,
-        //       fontSize: 24,
-        //     ),
-        // ),
         actions: [
           IconButtons(
             buttonFunction: () {
@@ -39,7 +32,7 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: ListView(
-        children:  [
+        children: [
           //sliding categories
           SlidingMainTitle(),
           //main banner
@@ -47,7 +40,7 @@ class HomeScreen extends StatelessWidget {
           //Headlining brands
           const HeadLiningBrands(),
           //most loved brands
-           MostLovedBrands()
+          MostLovedBrands()
         ],
       ),
     );
