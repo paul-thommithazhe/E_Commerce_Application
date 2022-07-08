@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:take_it_and_go/core/constants.dart';
-import 'package:take_it_and_go/home.dart';
 import 'package:take_it_and_go/screens/cart/widgets/cart_item.dart';
 import 'package:take_it_and_go/screens/cart/widgets/user_address_screen.dart';
 import 'package:take_it_and_go/screens/coupon/coupon.dart';
