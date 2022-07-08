@@ -19,7 +19,7 @@ class Home extends StatefulWidget {
 bool cartScreen = false;
 
 class _HomeState extends State<Home> {
-  final pages = const [
+  final List<Widget> pages = const [
     HomeScreen(),
     CategoryScreen(),
     WishListScreen(),
@@ -35,7 +35,7 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: index == 3
           ? null
           : BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
+              type: BottomNavigationBarType.fixed,
               onTap: (int pageIndex) {
                 setState(() {
                   index = pageIndex;
@@ -59,20 +59,22 @@ class _HomeState extends State<Home> {
                   label: 'HOME',
                 ),
                 BottomNavigationBarItem(
-                  icon: FaIcon(FontAwesomeIcons.list,size: 20,),
+                  icon: FaIcon(
+                    FontAwesomeIcons.list,
+                    size: 20,
+                  ),
                   label: 'CATEGORIES',
                 ),
                 BottomNavigationBarItem(
-                  icon: FaIcon(FontAwesomeIcons.heart,size: 20),
+                  icon: FaIcon(FontAwesomeIcons.heart, size: 20),
                   label: 'WISHLIST',
                 ),
                 BottomNavigationBarItem(
-                  icon: FaIcon(FontAwesomeIcons.bagShopping,size: 20),
+                  icon: FaIcon(FontAwesomeIcons.bagShopping, size: 20),
                   label: 'CART',
-                  
                 ),
                 BottomNavigationBarItem(
-                  icon: FaIcon(FontAwesomeIcons.user,size: 20),
+                  icon: FaIcon(FontAwesomeIcons.user, size: 20),
                   label: 'PROFILE',
                 ),
               ],

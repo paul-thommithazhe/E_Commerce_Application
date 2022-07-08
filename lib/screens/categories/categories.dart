@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:take_it_and_go/core/constants.dart';
 import 'package:take_it_and_go/home.dart';
+import 'package:take_it_and_go/screens/categories/widgets/category_item.dart';
 import 'package:take_it_and_go/widgets/icon_button.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -34,33 +34,11 @@ class CategoryScreen extends StatelessWidget {
               SizedBox(width: 30),
               CategoryItem(title: 'T-Shirts'),
               SizedBox(width: 30),
-              CategoryItem(title:'Jeans'),
+              CategoryItem(title: 'Jeans'),
             ],
           ),
         ],
       ),
-    );
-  }
-}
-
-class CategoryItem extends StatelessWidget {
-  const CategoryItem({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children:  [
-        const CircleAvatar(
-          radius: 40,
-          backgroundImage: NetworkImage(
-              'https://stylesatlife.com/wp-content/uploads/2021/06/Rohit-Khandelwal.jpg.webp'),
-        ),
-        Text(
-          title,
-          style:const TextStyle(color: kBlackColor),
-        )
-      ],
     );
   }
 }

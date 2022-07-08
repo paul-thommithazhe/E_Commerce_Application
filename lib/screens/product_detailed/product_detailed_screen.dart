@@ -11,175 +11,179 @@ class ProductDetailedScreen extends StatelessWidget {
   //dummy product sizes ......
   final List<String> size = ['S', 'M', 'L', 'XL'];
 
+  // Stream<QuerySnapshot<Map<String, dynamic>>> getData() async{
+  //   data = await FirebaseFirestore.instance.collection('category').get();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 1,
-        title: const Text(
-          'Brand Name',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+        appBar: AppBar(
+          elevation: 1,
+          title: const Text(
+            'Brand Name',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+          ),
+          actions: [
+            IconButtons(
+              buttonFunction: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CartScreen(),
+                  ),
+                );
+              },
+              icon: FontAwesomeIcons.bagShopping,
+              iconDataNotFaIcon: false,
+            )
+          ],
         ),
-        actions: [
-          IconButtons(
-            buttonFunction: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const CartScreen(),
-                ),
-              );
-            },
-            icon: FontAwesomeIcons.bagShopping,
-            iconDataNotFaIcon: false,
-          )
-        ],
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        height: 455,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(
-                                  'assets/images/detailed_image.jpeg'),
-                              fit: BoxFit.fill),
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          height: 455,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(
+                                    'assets/images/detailed_image.jpeg'),
+                                fit: BoxFit.fill),
+                          ),
                         ),
-                      ),
-                      kHeight10,
-                      const Text(
-                        'Dennis Lingo Men Pink Slim Fit Casual Shirt',
-                        style: TextStyle(
-                          color: kBlackColor,
-                          fontSize: 18,
-                        ),
-                      ),
-                      kHeight10,
-                      const Text(
-                        '₹ 1299',
-                        style: TextStyle(
+                        kHeight10,
+                        const Text(
+                          'Dennis Lingo Men Pink Slim Fit Casual Shirt',
+                          style: TextStyle(
                             color: kBlackColor,
                             fontSize: 18,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ],
+                          ),
+                        ),
+                        kHeight10,
+                        const Text(
+                          '₹ 1299',
+                          style: TextStyle(
+                              color: kBlackColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const Divider(
-                  thickness: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Select Size',
-                        style: TextStyle(
-                            color: kBlackColor,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18),
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            width: 300,
-                            child: ListView.separated(
-                              separatorBuilder: ((context, index) =>
-                                  const SizedBox(width: 8)),
-                              itemCount: 4,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) =>
-                                  ProductSizeContainer(
-                                productSize: size[index],
+                  const Divider(
+                    thickness: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Select Size',
+                          style: TextStyle(
+                              color: kBlackColor,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18),
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 50,
+                              width: 300,
+                              child: ListView.separated(
+                                separatorBuilder: ((context, index) =>
+                                    const SizedBox(width: 8)),
+                                itemCount: 4,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) =>
+                                    ProductSizeContainer(
+                                  productSize: size[index],
+                                ),
                               ),
                             ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border.all(
+                      color: const Color.fromARGB(77, 227, 217, 217))),
+              child: Stack(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const UserAddressScreen(),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(),
+                        child: Row(
+                          children: [
+                            OutlinedButton.icon(
+                              style: OutlinedButton.styleFrom(),
+                              onPressed: () {},
+                              icon: const Icon(Icons.favorite_outline,
+                                  color: kBlackColor),
+                              label: const Text(
+                                'WISHLIST',
+                                style:
+                                    TextStyle(color: kBlackColor, fontSize: 16),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      ElevatedButton.icon(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                            const Color(0xffF02052),
                           ),
-                        ],
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const UserAddressScreen()),
+                          );
+                        },
+                        icon: const FaIcon(
+                          FontAwesomeIcons.bagShopping,
+                          size: 16,
+                        ),
+                        label: const Text(
+                          'BUY NOW',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
                       ),
                     ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-                border:
-                    Border.all(color: const Color.fromARGB(77, 227, 217, 217))),
-            child: Stack(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const UserAddressScreen(),
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(),
-                      child: Row(
-                        children: [
-                          OutlinedButton.icon(
-                            style: OutlinedButton.styleFrom(),
-                            onPressed: () {},
-                            icon: const Icon(Icons.favorite_outline,
-                                color: kBlackColor),
-                            label: const Text(
-                              'WISHLIST',
-                              style:
-                                  TextStyle(color: kBlackColor, fontSize: 16),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    ElevatedButton.icon(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                          const Color(0xffF02052),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const UserAddressScreen()),
-                        );
-                      },
-                      icon: const FaIcon(
-                        FontAwesomeIcons.bagShopping,
-                        size: 16,
-                      ),
-                      label: const Text(
-                        'BUY NOW',
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          )
-        ],
-      ),
-    );
+                  )
+                ],
+              ),
+            )
+          ],
+        ));
   }
 }

@@ -35,6 +35,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           //sliding categories
           SlidingMainTitle(),
+          const Divider(thickness: 6),
           //main banner
           const MainBannerImage(),
           //Headlining brands
