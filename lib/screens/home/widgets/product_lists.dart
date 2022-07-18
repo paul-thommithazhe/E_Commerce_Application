@@ -20,12 +20,13 @@ class ListItem extends StatelessWidget {
 
             onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ProductDetailedScreen()));
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ProductDetailedScreen()),
+              );
             },
             child: Container(
-              height: 220,
+              height: 210,
               width: size.width / 2.2,
               decoration: const BoxDecoration(
                 color: Colors.grey,
@@ -49,7 +50,6 @@ class ListItem extends StatelessWidget {
                 IconButtons(
                   buttonFunction: () {},
                   icon: Icons.favorite,
-                  
                   iconButtonSize: 15,
                   size: 22,
                   paddingSize: 0,

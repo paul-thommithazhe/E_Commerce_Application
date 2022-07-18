@@ -18,15 +18,15 @@ class SlidingMainTitle extends StatelessWidget {
   //   'Kurtas',
   //   'Blazzers',
   // ];
-  List<String> slidingImages = [
-    'image1.jpeg',
-    'image2.jpeg',
-    'image3.jpeg',
-    'image4.jpeg',
-    'image5.jpeg',
-    'image6.jpeg',
-    'image6.jpeg',
-  ];
+  // List<String> slidingImages = [
+  //   'image1.jpeg',
+  //   'image2.jpeg',
+  //   'image3.jpeg',
+  //   'image4.jpeg',
+  //   'image5.jpeg',
+  //   'image6.jpeg',
+  //   'image6.jpeg',
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class SlidingMainTitle extends StatelessWidget {
                         //navigating to list of product items ...(eg :- shirt to list of shirt items)
 
                         builder: (context) => ListOfProdcutScreen(
-                          categoryTitle: snapshot.data!.docs[index].id,
+                          categoryTitle: snapshot.data!.docs[index]['name'],
                         ),
                       ),
                     );
@@ -89,7 +89,7 @@ class SlidingMainTitle extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        snapshot.data!.docs[index].id,
+                        snapshot.data!.docs[index]['name'],
                         style: const TextStyle(color: kBlackColor),
                       ),
                     ],
