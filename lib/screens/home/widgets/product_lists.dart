@@ -4,11 +4,22 @@ import 'package:take_it_and_go/screens/product_detailed/product_detailed_screen.
 import 'package:take_it_and_go/widgets/icon_button.dart';
 
 class ListItem extends StatelessWidget {
-  const ListItem({Key? key}) : super(key: key);
+  const ListItem({
+    Key? key,
+    required this.imageUrl,
+    required this.productTitle,
+    required this.productBrand,
+    required this.productPrice,
+  }) : super(key: key);
+  final String imageUrl;
+  final String productTitle;
+  final String productBrand;
+  final int productPrice;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -22,49 +33,66 @@ class ListItem extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ProductDetailedScreen()),
+                  builder: (context) => ProductDetailedScreen(
+                    imageUrl: imageUrl,
+                    name: productTitle,
+                    brand: productBrand,
+                    price: productPrice,
+                  ),
+                ),
               );
             },
-            child: Container(
-              height: 210,
-              width: size.width / 2.2,
-              decoration: const BoxDecoration(
-                color: Colors.grey,
-                image: DecorationImage(
-                    image: AssetImage('assets/images/shirt.webp'),
-                    fit: BoxFit.fill),
+            child: Hero(
+              tag: productTitle,
+              child: Container(
+                height: 210,
+                width: size.width / 2.2,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  image: DecorationImage(
+                      image: NetworkImage(imageUrl), fit: BoxFit.fill),
+                ),
               ),
             ),
           ),
           SizedBox(
-            height: 25,
+            height: 20,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                  'Louis Philippe',
-                  style: TextStyle(color: kBlackColor),
+                Text(
+                  productBrand.toUpperCase(),
+                  style: const TextStyle(
+                      color: kBlackColor, fontWeight: FontWeight.w400),
                 ),
-                kWidth20,
-                IconButtons(
-                  buttonFunction: () {},
-                  icon: Icons.favorite,
-                  iconButtonSize: 15,
-                  size: 22,
-                  paddingSize: 0,
-                  buttonColor: kGreyColor,
+                const Expanded(
+                  child: SizedBox(),
+                ),
+                SizedBox(
+                  width: 20,
+                  child: IconButtons(
+                    buttonFunction: () {},
+                    icon: Icons.favorite,
+                    iconButtonSize: 15,
+                    size: 22,
+                    paddingSize: 0,
+                    buttonColor: kGreyColor,
+                  ),
                 )
               ],
             ),
           ),
-          const Text(
-            'Men Slim Fit Casual Shirt',
-            style: TextStyle(color: Colors.grey, fontSize: 12),
+          Text(
+            productTitle,
+            style: const TextStyle(color: Colors.grey, fontSize: 12),
           ),
-          const Text(
-            '₹ 2,399',
-            style: TextStyle(color: kBlackColor),
+          Text(
+            '₹${productPrice.toString()}',
+            style: const TextStyle(
+              color: kBlackColor,
+              fontWeight: FontWeight.w600,
+            ),
           )
         ],
       ),

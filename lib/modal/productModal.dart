@@ -14,4 +14,6 @@ class ProductModal {
   String id, brand, name, image;
   int price;
   double offer;
+
+
 }

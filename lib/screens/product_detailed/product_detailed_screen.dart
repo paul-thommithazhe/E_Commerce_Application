@@ -7,22 +7,26 @@ import 'package:take_it_and_go/screens/product_detailed/widgets/size_container.d
 import 'package:take_it_and_go/widgets/icon_button.dart';
 
 class ProductDetailedScreen extends StatelessWidget {
-  ProductDetailedScreen({Key? key}) : super(key: key);
+  ProductDetailedScreen({
+    Key? key,
+    required this.imageUrl,
+    required this.name,
+    required this.brand,
+    required this.price,
+  }) : super(key: key);
   //dummy product sizes ......
   final List<String> size = ['S', 'M', 'L', 'XL'];
-
-  // Stream<QuerySnapshot<Map<String, dynamic>>> getData() async{
-  //   data = await FirebaseFirestore.instance.collection('category').get();
-  // }
-
+  String name, brand;
+  int price;
+  String imageUrl;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           elevation: 1,
-          title: const Text(
-            'Brand Name',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+          title:  Text(
+            brand.toUpperCase(),
+            style:const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
           ),
           actions: [
             IconButtons(
@@ -50,28 +54,30 @@ class ProductDetailedScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          width: double.infinity,
-                          height: 455,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage(
-                                    'assets/images/detailed_image.jpeg'),
-                                fit: BoxFit.fill),
+                        Hero(
+                          tag: name,
+                          child: Container(
+                            width: double.infinity,
+                            height: 455,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(imageUrl),
+                                  fit: BoxFit.fill),
+                            ),
                           ),
                         ),
                         kHeight10,
-                        const Text(
-                          'Dennis Lingo Men Pink Slim Fit Casual Shirt',
-                          style: TextStyle(
+                         Text(
+                          name,
+                          style:const TextStyle(
                             color: kBlackColor,
                             fontSize: 18,
                           ),
                         ),
                         kHeight10,
-                        const Text(
-                          '₹ 1299',
-                          style: TextStyle(
+                         Text(
+                          '₹ ${price.toString()}',
+                          style:const TextStyle(
                               color: kBlackColor,
                               fontSize: 18,
                               fontWeight: FontWeight.w600),
