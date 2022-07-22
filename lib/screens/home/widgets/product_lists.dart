@@ -10,11 +10,12 @@ class ListItem extends StatelessWidget {
     required this.productTitle,
     required this.productBrand,
     required this.productPrice,
+    required this.productQuantity,
   }) : super(key: key);
   final String imageUrl;
   final String productTitle;
   final String productBrand;
-  final int productPrice;
+  final int productPrice, productQuantity;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,7 @@ class ListItem extends StatelessWidget {
                     name: productTitle,
                     brand: productBrand,
                     price: productPrice,
+                    quantity: productQuantity,
                   ),
                 ),
               );

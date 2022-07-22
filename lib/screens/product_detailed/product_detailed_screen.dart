@@ -1,32 +1,55 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:take_it_and_go/core/constants.dart';
+import 'package:take_it_and_go/model/cart_model/cart_model.dart';
 import 'package:take_it_and_go/screens/cart/cart.dart';
 import 'package:take_it_and_go/screens/cart/widgets/user_address_screen.dart';
 import 'package:take_it_and_go/screens/product_detailed/widgets/size_container.dart';
 import 'package:take_it_and_go/widgets/icon_button.dart';
 
-class ProductDetailedScreen extends StatelessWidget {
+class ProductDetailedScreen extends StatefulWidget {
   ProductDetailedScreen({
     Key? key,
     required this.imageUrl,
     required this.name,
     required this.brand,
     required this.price,
+    required this.quantity,
   }) : super(key: key);
+  final String name, brand, imageUrl;
+  final int price;
+  int quantity;
+
+  @override
+  State<ProductDetailedScreen> createState() => _ProductDetailedScreenState();
+}
+
+class _ProductDetailedScreenState extends State<ProductDetailedScreen> {
   //dummy product sizes ......
   final List<String> size = ['S', 'M', 'L', 'XL'];
-  String name, brand;
-  int price;
-  String imageUrl;
+
+  int _selectedIndex = 0;
+
+  String? productNameFromList, productSizeFromList;
+  int productQ = 0;
+
+  snackBarShow(String text) {
+    const SnackBar(
+      content: Text('Already Product Added'),
+      backgroundColor: kBlackColor,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           elevation: 1,
-          title:  Text(
-            brand.toUpperCase(),
-            style:const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+          title: Text(
+            widget.brand.toUpperCase(),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
           ),
           actions: [
             IconButtons(
@@ -55,29 +78,29 @@ class ProductDetailedScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Hero(
-                          tag: name,
+                          tag: widget.name,
                           child: Container(
                             width: double.infinity,
                             height: 455,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: NetworkImage(imageUrl),
+                                  image: NetworkImage(widget.imageUrl),
                                   fit: BoxFit.fill),
                             ),
                           ),
                         ),
                         kHeight10,
-                         Text(
-                          name,
-                          style:const TextStyle(
+                        Text(
+                          widget.name,
+                          style: const TextStyle(
                             color: kBlackColor,
                             fontSize: 18,
                           ),
                         ),
                         kHeight10,
-                         Text(
-                          '₹ ${price.toString()}',
-                          style:const TextStyle(
+                        Text(
+                          '₹ ${widget.price.toString()}',
+                          style: const TextStyle(
                               color: kBlackColor,
                               fontSize: 18,
                               fontWeight: FontWeight.w600),
@@ -111,8 +134,23 @@ class ProductDetailedScreen extends StatelessWidget {
                                 itemCount: 4,
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (context, index) =>
-                                    ProductSizeContainer(
-                                  productSize: size[index],
+                                    GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _selectedIndex = index;
+                                    });
+
+                                    print(size[_selectedIndex]);
+                                    log(size[index]);
+
+                                    // if(size[index].isSelected)
+                                  },
+                                  child: ProductSizeContainer(
+                                    productSize: size[index],
+                                    color: _selectedIndex == index
+                                        ? kButtonandBorderColors
+                                        : kGreyColor,
+                                  ),
                                 ),
                               ),
                             ),
@@ -129,6 +167,7 @@ class ProductDetailedScreen extends StatelessWidget {
                   border: Border.all(
                       color: const Color.fromARGB(77, 227, 217, 217))),
               child: Stack(
+                alignment: Alignment.bottomCenter,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -147,11 +186,65 @@ class ProductDetailedScreen extends StatelessWidget {
                           children: [
                             OutlinedButton.icon(
                               style: OutlinedButton.styleFrom(),
-                              onPressed: () {},
-                              icon: const Icon(Icons.favorite_outline,
+                              onPressed: () {
+                                print(
+                                    cartTotalScreen.map((e) => print(e.size)));
+                                if (cartTotalScreen.isEmpty) {
+                                  print('empty');
+                                  cartTotalScreen.add(
+                                    CartModel(
+                                      productName: widget.name,
+                                      brand: widget.brand,
+                                      size: size[_selectedIndex],
+                                      image: widget.imageUrl,
+                                      price: widget.price,
+                                      quantity: 1,
+                                    ),
+                                  );
+                                } else {
+                                  for (int i = 0;
+                                      i < cartTotalScreen.length;
+                                      i++) {
+                                    productNameFromList =
+                                        cartTotalScreen[i].productName;
+
+                                    productSizeFromList =
+                                        cartTotalScreen[i].size;
+
+                                    print(
+                                        '==========================================================');
+                                    print(productNameFromList);
+                                    print(productSizeFromList);
+
+                                    if (widget.name ==
+                                            cartTotalScreen[i].productName &&
+                                        size[_selectedIndex] ==
+                                            cartTotalScreen[i].size) {
+                                      break;
+                                    } else if (widget.name ==
+                                            cartTotalScreen[i].productName &&
+                                        size[_selectedIndex] !=
+                                            cartTotalScreen[i].size) {
+                                      print('size different');
+                                      cartTotalScreen.add(
+                                        CartModel(
+                                          productName: widget.name,
+                                          brand: widget.brand,
+                                          size: size[_selectedIndex],
+                                          image: widget.imageUrl,
+                                          price: widget.price,
+                                          quantity: 1,
+                                        ),
+                                      );
+                                      break;
+                                    }
+                                  }
+                                }
+                              },
+                              icon: const Icon(Icons.shopify_outlined,
                                   color: kBlackColor),
                               label: const Text(
-                                'WISHLIST',
+                                'ADD TO CART',
                                 style:
                                     TextStyle(color: kBlackColor, fontSize: 16),
                               ),
@@ -166,23 +259,33 @@ class ProductDetailedScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const UserAddressScreen()),
-                          );
+                          widget.quantity == 0
+                              ? null
+                              : Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const UserAddressScreen()),
+                                );
                         },
-                        icon: const FaIcon(
-                          FontAwesomeIcons.bagShopping,
-                          size: 16,
-                        ),
-                        label: const Text(
-                          'BUY NOW',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
+                        icon: widget.quantity == 0
+                            ? SizedBox()
+                            : const FaIcon(
+                                FontAwesomeIcons.bagShopping,
+                                size: 16,
+                              ),
+                        label: widget.quantity == 0
+                            ? Text(
+                                'OUT OF STOCK',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                              )
+                            : Text(
+                                'BUY NOW',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
                       ),
                     ],
                   )

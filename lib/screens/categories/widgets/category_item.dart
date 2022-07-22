@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:take_it_and_go/core/constants.dart';
 
 class CategoryItem extends StatelessWidget {
-  const CategoryItem({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const CategoryItem({Key? key, required this.title, required this.image})
+      : super(key: key);
+  final String title, image;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children:  [
-        const CircleAvatar(
+      children: [
+        CircleAvatar(
           radius: 40,
-          backgroundImage: NetworkImage(
-              'https://stylesatlife.com/wp-content/uploads/2021/06/Rohit-Khandelwal.jpg.webp'),
+          backgroundImage: NetworkImage(image),
         ),
         Text(
           title,
-          style:const TextStyle(color: kBlackColor),
+          style: const TextStyle(color: kBlackColor),
         )
       ],
     );

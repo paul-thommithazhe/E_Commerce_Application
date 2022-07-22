@@ -3,7 +3,18 @@ import 'package:take_it_and_go/core/constants.dart';
 import 'package:take_it_and_go/screens/cart/widgets/item_name_and_description.dart';
 
 class CartItem extends StatelessWidget {
-  const CartItem({Key? key}) : super(key: key);
+  const CartItem({
+    Key? key,
+    required this.title,
+    required this.size,
+    required this.brand,
+    required this.image,
+    required this.price,
+    required this.quantity,
+  }) : super(key: key);
+
+  final String title, size, brand, image;
+  final int price, quantity;
 
   @override
   Widget build(BuildContext context) {
@@ -11,10 +22,12 @@ class CartItem extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         padding: const EdgeInsets.only(top: 15),
-        height: 180,
+        height: 195,
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color: Color.fromARGB(255, 230, 223, 223)),
+          border: Border.all(
+            color: const Color.fromARGB(255, 230, 223, 223),
+          ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -23,49 +36,68 @@ class CartItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                    height: 90,
-                    width: 90,
-                    child: Image(
-                      image: NetworkImage(
-                          'https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/1364628/2016/8/31/11472636737718-Roadster-Men-Blue-Regular-Fit-Printed-Casual-Shirt-6121472636737160-1.jpg'),
-                    )),
+                SizedBox(
+                  height: 90,
+                  width: 90,
+                  child: Image(
+                    image: NetworkImage(image),
+                  ),
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ItemTitleOrDescription(titleOrDecription: 'Louis Philippe'),
+                    ItemTitleOrDescription(titleOrDecription: brand),
                     ItemTitleOrDescription(
-                      titleOrDecription: 'Men Slim Casual Shirt',
+                      titleOrDecription: title,
                       color: Colors.grey,
                     ),
                     kHeight10,
                     Container(
                       height: 30,
-                      width: 60,
+                      width: 70,
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(color: Colors.grey.shade300),
-                      child: const Text(
-                        'Size : S',
-                        style: TextStyle(
+                      child: Text(
+                        'Size : $size',
+                        style: const TextStyle(
                             color: kBlackColor,
                             fontSize: 14,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
                     kHeight10,
-                    Container(
-                      height: 30,
-                      width: 60,
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(color: Colors.grey.shade300),
-                      child: const Text(
-                        'Qty : 1',
-                        style: TextStyle(
-                            color: kBlackColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    )
+                    Row(
+                      children: [
+                        Container(
+                          height: 30,
+                          width: 70,
+                          padding: const EdgeInsets.all(5),
+                          decoration:
+                              BoxDecoration(color: Colors.grey.shade300),
+                          child: Text(
+                            'Qty : $quantity',
+                            style: const TextStyle(
+                                color: kBlackColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        kWidth20,
+                        ElevatedButton(
+                          onPressed: quantity == 1 ? null : () {},
+                          style: ElevatedButton.styleFrom(
+                              primary: kButtonandBorderColors,
+                              shape: const CircleBorder()),
+                          child: const Icon(Icons.remove),
+                        ),
+                        ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                                primary: kButtonandBorderColors,
+                                shape: const CircleBorder()),
+                            child: const Icon(Icons.add))
+                      ],
+                    ),
                   ],
                 ),
               ],
@@ -83,7 +115,6 @@ class CartItem extends StatelessWidget {
                 ),
               ),
             ),
-           
           ],
         ),
       ),

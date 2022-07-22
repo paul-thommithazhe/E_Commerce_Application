@@ -1,15 +1,64 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:take_it_and_go/core/constants.dart';
+import 'package:take_it_and_go/model/cart_model/cart_model.dart';
 import 'package:take_it_and_go/screens/cart/widgets/cart_item.dart';
 import 'package:take_it_and_go/screens/cart/widgets/user_address_screen.dart';
-import 'package:take_it_and_go/screens/coupon/coupon.dart';
 import 'package:take_it_and_go/widgets/icon_button.dart';
 
-class CartScreen extends StatelessWidget {
-  const CartScreen({Key? key}) : super(key: key);
+List<CartModel> cartTotalScreen = [];
+
+class CartScreen extends StatefulWidget {
+  const CartScreen({
+    Key? key,
+    this.title,
+    this.size,
+    this.brand,
+    this.image,
+    this.price,
+    this.quantity,
+  }) : super(key: key);
+
+  final String? title, size, brand, image;
+  final int? price, quantity;
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  showCouponDialog(context, size) {
+    return showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (BuildContext context) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.only(
+                    left: 10, right: 10, top: 10, bottom: 5),
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    fixedSize: Size(size.width - 20, 10),
+                    primary: kButtonandBorderColors),
+                onPressed: () {},
+                child: const Text('Apply'),
+              )
+            ],
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
@@ -20,109 +69,137 @@ class CartScreen extends StatelessWidget {
             icon: Icons.arrow_back),
         title: const Text(
           'SHOPPING BAG',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView(
+      body: cartTotalScreen.isEmpty
+          ? Center(
+              child: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              style: ElevatedButton.styleFrom(primary: kButtonandBorderColors),
+              child: const Text('Cart is Empty ! Keep Shopping'),
+            ))
+          : Column(
               children: [
-                //TODO progress bar cart item
-                const SizedBox(height: 50),
-                // cart
                 Container(
                   height: 38,
                   decoration: BoxDecoration(
                     color: Colors.grey.shade400,
-                    border:
-                        Border.all(color: Color.fromARGB(255, 214, 206, 206)),
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 214, 206, 206)),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Text(
-                            '1 ITEMS SELECTED (807)',
-                            style: TextStyle(color: kBlackColor),
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.delete),
-                          )
-                        ]),
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          '${cartTotalScreen.length} ITEMS SELECTED (807)',
+                          style: const TextStyle(color: kBlackColor),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            cartTotalScreen.clear();
+                            setState(() {
+                              
+                            });
+                          },
+                          icon: const Icon(Icons.delete),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-
-                const CartItem(),
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: cartTotalScreen.length,
+                      itemBuilder: (context, index) {
+                        return CartItem(
+                            title: cartTotalScreen[index].productName,
+                            size: cartTotalScreen[index].size,
+                            brand: cartTotalScreen[index].brand,
+                            image: cartTotalScreen[index].image,
+                            price: cartTotalScreen[index].price,
+                            quantity: cartTotalScreen[index].quantity);
+                      }),
+                ),
                 const Divider(thickness: 4),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
+                  child: GestureDetector(
+                    onTap: () {
+                      showCouponDialog(context, screenSize);
+                    },
+                    child: SizedBox(
                       child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'APPLY COUPON',
-                        style: TextStyle(
-                          color: kBlackColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Expanded(
+                            child: Text(
+                              'APPLY COUPON',
+                              style: TextStyle(
+                                color: kBlackColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                          Icon(Icons.arrow_circle_right)
+                        ],
                       ),
-                      IconButtons(
-                          buttonFunction: () {
-                            Navigator.push(
+                    ),
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: const Color.fromARGB(77, 227, 217, 217))),
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          const Text(
+                            'Total Amount',
+                            style: TextStyle(color: kBlackColor),
+                          ),
+                          const SizedBox(width: 60),
+                          ElevatedButton.icon(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(
+                                const Color(0xffF02052),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CouponScreen()));
-                          },
-                          icon: Icons.arrow_circle_right)
+                                    builder: (context) =>
+                                        const UserAddressScreen()),
+                              );
+                            },
+                            icon: const FaIcon(
+                              FontAwesomeIcons.dollarSign,
+                              size: 16,
+                            ),
+                            label: const Text(
+                              'ADDRESS ',
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
                     ],
-                  )),
+                  ),
                 )
               ],
             ),
-          ),
-          Container(
-            height: 60,
-            color: const Color.fromARGB(255, 246, 244, 244),
-            child: Center(
-              child: Stack(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      const Text(
-                        '₹ 807.00',
-                        style: TextStyle(
-                            color: kBlackColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const UserAddressScreen()),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                            primary: kButtonandBorderColors),
-                        child: const Text('PROCEED TO PAYMENT'),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
     );
   }
 }

@@ -9,7 +9,6 @@ class MainBannerImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return StreamBuilder(
         stream: FirebaseFirestore.instance.collection('Banner').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -18,33 +17,26 @@ class MainBannerImage extends StatelessWidget {
               'Something Went Wrong',
               style: TextStyle(color: kBlackColor),
             );
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: Text(
-                'Loading',
-                style: TextStyle(color: kBlackColor),
-              ),
-            );
-          }
-          if (!snapshot.hasData) {
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (!snapshot.hasData) {
             return const Center(
               child: CircularProgressIndicator(
                 color: kButtonandBorderColors,
               ),
             );
-          }
-
-          return Container(
-            width: double.infinity,
-            height: 245,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(snapshot.data!.docs[0]['images']),
-                fit: BoxFit.fill,
+          } else {
+            return Container(
+              width: double.infinity,
+              height: 245,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(snapshot.data!.docs[0]['images']),
+                  fit: BoxFit.fill,
+                ),
               ),
-            ),
-          );
+            );
+          }
         });
   }
 }

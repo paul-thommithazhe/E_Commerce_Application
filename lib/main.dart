@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:take_it_and_go/core/constants.dart';
 import 'package:take_it_and_go/home.dart';
-import 'package:take_it_and_go/modal/provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

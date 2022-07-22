@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:take_it_and_go/core/constants.dart';
-import 'package:take_it_and_go/screens/cart/cart.dart';
 import 'package:take_it_and_go/screens/cart/widgets/user_address_screen.dart';
 
 class CouponScreen extends StatelessWidget {
@@ -20,10 +19,10 @@ class CouponScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const CartScreen()));
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => CartScreen()));
                 },
                 style: ElevatedButton.styleFrom(
                     fixedSize: const Size(200, 20),
@@ -35,7 +34,9 @@ class CouponScreen extends StatelessWidget {
               )
             ],
           ),
+          
         ),
+
       ),
     );
   }

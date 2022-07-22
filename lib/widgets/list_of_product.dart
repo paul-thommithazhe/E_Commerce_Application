@@ -56,6 +56,15 @@ class ListOfProdcutScreen extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             }
+             if (snapshot.data!.docs ==null || snapshot.data!.docs.isEmpty) {
+              print('no data');
+              return const Center(
+                child: Text(
+                  'No Data Available',
+                  style: TextStyle(color: Colors.black, fontSize: 16),
+                ),
+              );
+            }
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,10 +77,14 @@ class ListOfProdcutScreen extends StatelessWidget {
                     crossAxisSpacing: 2,
                     itemBuilder: (context, index) {
                       return ListItem(
-                        imageUrl: snapshot.data!.docs[index]['image'],
+                        imageUrl: snapshot.connectionState ==
+                                ConnectionState.waiting
+                            ? const Center(child: CircularProgressIndicator())
+                            : snapshot.data!.docs[index]['image'],
                         productTitle: snapshot.data!.docs[index]['name'],
                         productBrand: snapshot.data!.docs[index]['brand'],
                         productPrice: snapshot.data!.docs[index]['price'],
+                        productQuantity: snapshot.data!.docs[index]['quantity'],
                       );
                     },
                   ),
@@ -127,14 +140,3 @@ class ListOfProdcutScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
