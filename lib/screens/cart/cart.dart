@@ -9,7 +9,7 @@ import 'package:take_it_and_go/widgets/icon_button.dart';
 List<CartModel> cartTotalScreen = [];
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({
+  CartScreen({
     Key? key,
     this.title,
     this.size,
@@ -21,41 +21,12 @@ class CartScreen extends StatefulWidget {
 
   final String? title, size, brand, image;
   final int? price, quantity;
-
+  TextEditingController couponController = TextEditingController();
   @override
   State<CartScreen> createState() => _CartScreenState();
 }
 
 class _CartScreenState extends State<CartScreen> {
-  showCouponDialog(context, size) {
-    return showModalBottomSheet(
-        isScrollControlled: true,
-        context: context,
-        builder: (BuildContext context) {
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(
-                    left: 10, right: 10, top: 10, bottom: 5),
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    fixedSize: Size(size.width - 20, 10),
-                    primary: kButtonandBorderColors),
-                onPressed: () {},
-                child: const Text('Apply'),
-              )
-            ],
-          );
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -68,7 +39,7 @@ class _CartScreenState extends State<CartScreen> {
             },
             icon: Icons.arrow_back),
         title: const Text(
-          'SHOPPING BAG',
+          'SHOPPING CART',
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
       ),
@@ -103,9 +74,7 @@ class _CartScreenState extends State<CartScreen> {
                         IconButton(
                           onPressed: () {
                             cartTotalScreen.clear();
-                            setState(() {
-                              
-                            });
+                            setState(() {});
                           },
                           icon: const Icon(Icons.delete),
                         )
@@ -131,7 +100,32 @@ class _CartScreenState extends State<CartScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
                     onTap: () {
-                      showCouponDialog(context, screenSize);
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text(
+                              "Enter Coupon",
+                              style: TextStyle(color: kBlackColor),
+                            ),
+                            content: TextFormField(
+                              controller: widget.couponController,
+                              decoration:
+                                  InputDecoration(border: OutlineInputBorder()),
+                            ),
+                            actions: [
+                              ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Colors.pink),
+                                  onPressed: () {},
+                                  child: const Text(
+                                    'Apply',
+                                    style: TextStyle(color: Colors.white),
+                                  ))
+                            ],
+                          );
+                        },
+                      );
                     },
                     child: SizedBox(
                       child: Row(
@@ -164,30 +158,29 @@ class _CartScreenState extends State<CartScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           const Text(
-                            'Total Amount',
-                            style: TextStyle(color: kBlackColor),
+                            ' Rs. 807',
+                            style: TextStyle(
+                                color: kBlackColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
                           ),
                           const SizedBox(width: 60),
-                          ElevatedButton.icon(
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(
-                                const Color(0xffF02052),
-                              ),
-                            ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: kButtonandBorderColors,
+                                fixedSize: const Size(150, 30)),
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const UserAddressScreen()),
-                              );
+                              if (auth.currentUser!.uid.isNotEmpty) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ListOfAddress(),
+                                  ),
+                                );
+                              }
                             },
-                            icon: const FaIcon(
-                              FontAwesomeIcons.dollarSign,
-                              size: 16,
-                            ),
-                            label: const Text(
-                              'ADDRESS ',
+                            child: const Text(
+                              'PLACE ORDER',
                               style: TextStyle(
                                 fontSize: 16,
                               ),

@@ -6,6 +6,7 @@ import 'package:take_it_and_go/core/constants.dart';
 import 'package:take_it_and_go/model/cart_model/cart_model.dart';
 import 'package:take_it_and_go/screens/cart/cart.dart';
 import 'package:take_it_and_go/screens/cart/widgets/user_address_screen.dart';
+import 'package:take_it_and_go/screens/login/login.dart';
 import 'package:take_it_and_go/screens/product_detailed/widgets/size_container.dart';
 import 'package:take_it_and_go/widgets/icon_button.dart';
 
@@ -57,7 +58,7 @@ class _ProductDetailedScreenState extends State<ProductDetailedScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const CartScreen(),
+                    builder: (context) => CartScreen(),
                   ),
                 );
               },
@@ -177,7 +178,7 @@ class _ProductDetailedScreenState extends State<ProductDetailedScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const UserAddressScreen(),
+                              builder: (context) => UserAddressScreen(),
                             ),
                           );
                         },
@@ -210,11 +211,6 @@ class _ProductDetailedScreenState extends State<ProductDetailedScreen> {
 
                                     productSizeFromList =
                                         cartTotalScreen[i].size;
-
-                                    print(
-                                        '==========================================================');
-                                    print(productNameFromList);
-                                    print(productSizeFromList);
 
                                     if (widget.name ==
                                             cartTotalScreen[i].productName &&
@@ -259,28 +255,36 @@ class _ProductDetailedScreenState extends State<ProductDetailedScreen> {
                           ),
                         ),
                         onPressed: () {
-                          widget.quantity == 0
-                              ? null
-                              : Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const UserAddressScreen()),
-                                );
+                          if (auth.currentUser != null) {
+                            widget.quantity == 0
+                                ? null
+                                : Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ListOfAddress(),
+                                    ),
+                                  );
+                          } else {
+                            log('pleasae login first');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginScreen()));
+                          }
                         },
                         icon: widget.quantity == 0
-                            ? SizedBox()
+                            ? const SizedBox()
                             : const FaIcon(
                                 FontAwesomeIcons.bagShopping,
                                 size: 16,
                               ),
                         label: widget.quantity == 0
-                            ? Text(
+                            ? const Text(
                                 'OUT OF STOCK',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 16),
                               )
-                            : Text(
+                            : const Text(
                                 'BUY NOW',
                                 style: TextStyle(
                                   fontSize: 16,

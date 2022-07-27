@@ -19,12 +19,12 @@ class Home extends StatefulWidget {
 bool cartScreen = false;
 
 class _HomeState extends State<Home> {
-  final List<Widget> pages = const [
-    HomeScreen(),
-    CategoryScreen(),
-    WishListScreen(),
+  final List<Widget> pages = [
+    const HomeScreen(),
+    const CategoryScreen(),
+    const WishListScreen(),
     CartScreen(),
-    ProfileScreen(),
+    const ProfileScreen(),
   ];
 
   int index = 0;

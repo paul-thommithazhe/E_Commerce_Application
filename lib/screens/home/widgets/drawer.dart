@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:take_it_and_go/core/constants.dart';
+import 'package:take_it_and_go/home.dart';
 import 'package:take_it_and_go/screens/home/home_screen.dart';
 import 'package:take_it_and_go/screens/login/login.dart';
 import 'package:take_it_and_go/screens/profile/profile.dart';
@@ -20,13 +23,17 @@ class DrawerHomePage extends StatelessWidget {
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: <Widget>[
-                  const UserAccountsDrawerHeader(
-                    decoration: BoxDecoration(
+                  UserAccountsDrawerHeader(
+                    decoration: const BoxDecoration(
                       color: kButtonandBorderColors,
                     ),
-                    accountName: Text("Please Login  ! "),
-                    accountEmail: Text("emailaddress@gmail.com"),
-                    currentAccountPicture: CircleAvatar(
+                    accountName: auth.currentUser != null
+                        ? const Text('name')
+                        : const Text("Please Login  ! "),
+                    accountEmail: auth.currentUser != null
+                        ? Text(auth.currentUser!.email!)
+                        : const Text(''),
+                    currentAccountPicture: const CircleAvatar(
                       backgroundImage: AssetImage(
                         'assets/images/default_profile.jpeg',
                       ),
@@ -77,18 +84,37 @@ class DrawerHomePage extends StatelessWidget {
                 ],
               ),
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LoginScreen()));
-              },
-              child: const Text(
-                'Login? ',
-                style: TextStyle(color: kBlackColor, fontSize: 18),
-              ),
-            )
+            auth.currentUser != null
+                ? ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        shape: const StadiumBorder(),
+                        primary: kButtonandBorderColors),
+                    onPressed: () {
+                      FirebaseAuth.instance.signOut();
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      'Logout',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500),
+                    ))
+                : GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginScreen(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Login? ',
+                      style: TextStyle(color: kBlackColor, fontSize: 18),
+                    ),
+                  ),
+            kHeight10,
           ],
         ),
       ),

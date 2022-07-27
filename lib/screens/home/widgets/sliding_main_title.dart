@@ -56,6 +56,7 @@ class SlidingMainTitle extends StatelessWidget {
 
                         builder: (context) => ListOfProdcutScreen(
                           categoryTitle: snapshot.data!.docs[index]['name'],
+                          // productid:snapshot.data!.doc
                         ),
                       ),
                     );

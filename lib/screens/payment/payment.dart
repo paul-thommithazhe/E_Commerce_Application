@@ -11,7 +11,9 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
-  String payment_method = '';
+   String payment_method = '';
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +70,23 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             fontWeight: FontWeight.w700),
                       ),
                       ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
+                          //get the cart details and add to product value to the firebase and decrement the counter of stock
+                          //
+
+
+
+                          // get current id and product id and store it in the database
+                          // Map<String, dynamic> data = {
+                          //   'productid': productId,
+                          //   'userid': auth.currentUser!.uid
+                          // };
+
+                          // await FirebaseFirestore.instance
+                          //     .collection('cart')
+                          //     .doc()
+                          //     .set(data);
+
                           Navigator.push(
                             context,
                             // if payment success it will direct to paymentsuccess page.........
@@ -79,8 +97,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         style: ElevatedButton.styleFrom(
                             primary: kButtonandBorderColors,
                             fixedSize: const Size(160, 25)),
-                        child: const Text('PAY NOW',
-                            style: TextStyle(fontSize: 16)),
+                        child: const Text(
+                          'PAY NOW',
+                          style: TextStyle(fontSize: 16),
+                        ),
                       ),
                     ],
                   )

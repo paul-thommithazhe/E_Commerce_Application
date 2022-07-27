@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 //constant colors
@@ -16,3 +17,7 @@ const kWidth20 = SizedBox(width: 20);
 //divider
 
 const kDivider = Divider(thickness: 2);
+
+//Firebase auth
+
+final FirebaseAuth auth = FirebaseAuth.instance;

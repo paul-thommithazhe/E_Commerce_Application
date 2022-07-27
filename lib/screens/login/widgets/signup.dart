@@ -1,13 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:take_it_and_go/core/constants.dart';
 import 'package:take_it_and_go/home.dart';
 import 'package:take_it_and_go/model/provider/auth/auth_controller.dart';
-import 'package:take_it_and_go/screens/login/widgets/signup.dart';
+import 'package:take_it_and_go/screens/login/login.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
+class SignupPage extends StatelessWidget {
+  SignupPage({Key? key}) : super(key: key);
 
   TextEditingController nameController = TextEditingController();
 
@@ -28,13 +26,20 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Login or Signup',
+                    'Signup',
                     style: TextStyle(
                         color: kBlackColor,
                         fontSize: 22,
                         fontWeight: FontWeight.bold),
                   ),
-
+                  kHeight10,
+                  TextFormField(
+                    controller: nameController,
+                    decoration: const InputDecoration(
+                      hintText: 'Name',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
                   kHeight10,
                   TextFormField(
                     controller: emailController,
@@ -64,29 +69,19 @@ class LoginScreen extends StatelessWidget {
                   // GoogleSignin(),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 40),
+                        minimumSize: Size(double.infinity, 40),
                         primary: kButtonandBorderColors),
-                    onPressed: () async {
-                      try {
-                        UserCredential userLogin = await FirebaseAuth.instance.signInWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passwordController.text);
-                        print('successfully loged in');
+                    onPressed: () {
+                       authController.registerUser(nameController.text,
+                          emailController.text, passwordController.text);
 
-                       
-
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (context) => Home()),
-                            (route) => false);
-                      } catch (e) {
-                        print(e);
-                        print(
-                            '=================================================');
-                      }
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => Home()),
+                          (route) => false);
                     },
                     child: const Text(
-                      'CONTINUE',
+                      'Signup',
                       style: TextStyle(fontSize: 18),
                     ),
                   ),
@@ -97,18 +92,18 @@ class LoginScreen extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SignupPage()));
+                              builder: (context) => LoginScreen()));
                     },
                     child: Row(
                       children: const [
                         Expanded(
                           child: Text(
-                            'Don\'t have an account create one?',
+                            'Already have one?',
                             style: TextStyle(color: kBlackColor, fontSize: 15),
                           ),
                         ),
                         Text(
-                          'Signup',
+                          'Login Here',
                           style: TextStyle(
                               color: kButtonandBorderColors,
                               fontSize: 18,
