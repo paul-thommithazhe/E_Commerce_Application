@@ -1,19 +1,37 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:take_it_and_go/core/constants.dart';
 import 'package:take_it_and_go/screens/cart/widgets/user_address_screen.dart';
 import 'package:take_it_and_go/screens/payment/widgets/paymet_success.dart';
 
 class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({Key? key}) : super(key: key);
-
+  PaymentScreen({Key? key, required this.productId, required this.quantity})
+      : super(key: key);
+  String productId;
+  int price = 500;
+  int quantity;
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
-   String payment_method = '';
+  String payment_method = '';
 
-  
+  // razorPayPayment() {
+
+  //   }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,18 +92,43 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           //get the cart details and add to product value to the firebase and decrement the counter of stock
                           //
 
+                          int? stockQuantity;
+                          var collection =
+                              FirebaseFirestore.instance.collection('products');
+                          var docSnapshot =
+                              await collection.doc(widget.productId).get();
+                          if (docSnapshot.exists) {
+                            Map<String, dynamic>? dataValue =
+                                docSnapshot.data();
+                            var value = dataValue?[
+                                'quantity']; // <-- The value you want to retrieve.
 
+                            setState(() {
+                              stockQuantity = value;
+                            });
+                          }
+                          int finalQuantity = stockQuantity! - widget.quantity;
 
+                          print(
+                              '=================================================');
+                          Map<String, dynamic> updatedData = {
+                            'quantity': finalQuantity
+                          };
+
+                          FirebaseFirestore.instance
+                              .collection('products')
+                              .doc(widget.productId)
+                              .update(updatedData);
                           // get current id and product id and store it in the database
-                          // Map<String, dynamic> data = {
-                          //   'productid': productId,
-                          //   'userid': auth.currentUser!.uid
-                          // };
+                          Map<String, dynamic> data = {
+                            'productid': widget.productId,
+                            'userid': auth.currentUser!.uid
+                          };
 
-                          // await FirebaseFirestore.instance
-                          //     .collection('cart')
-                          //     .doc()
-                          //     .set(data);
+                          await FirebaseFirestore.instance
+                              .collection('cart')
+                              .doc()
+                              .set(data);
 
                           Navigator.push(
                             context,
@@ -113,3 +156,30 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 }
+
+
+// class PaymentStrip extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(),
+//       body: Column(
+//         children: [
+//           CardField(
+//             onCardChanged: (card) {
+//               print(card);
+//             },
+//           ),
+//           TextButton(
+//             onPressed: () async {
+//               // create payment method
+//               final paymentMethod =
+//                   await Stripe.instance.createPaymentMethod(PaymentMethodParams.card(paymentMethodData: ));
+//             },
+//             child: Text('pay'),
+//           )
+//         ],
+//       ),
+//     );
+//   }
+// }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:take_it_and_go/core/constants.dart';
 import 'package:take_it_and_go/model/cart_model/cart_model.dart';
 import 'package:take_it_and_go/screens/cart/widgets/cart_item.dart';
@@ -17,9 +16,10 @@ class CartScreen extends StatefulWidget {
     this.image,
     this.price,
     this.quantity,
+    this.productId,
   }) : super(key: key);
 
-  final String? title, size, brand, image;
+  final String? title, size, brand, image, productId;
   final int? price, quantity;
   TextEditingController couponController = TextEditingController();
   @override
@@ -174,7 +174,9 @@ class _CartScreenState extends State<CartScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ListOfAddress(),
+                                    builder: (context) => ListOfAddress(
+                                      productIdValue: widget.productId!,
+                                    ),
                                   ),
                                 );
                               }

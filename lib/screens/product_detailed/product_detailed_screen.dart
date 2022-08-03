@@ -18,8 +18,9 @@ class ProductDetailedScreen extends StatefulWidget {
     required this.brand,
     required this.price,
     required this.quantity,
+    required this.productId,
   }) : super(key: key);
-  final String name, brand, imageUrl;
+  final String name, brand, imageUrl, productId;
   final int price;
   int quantity;
 
@@ -58,7 +59,8 @@ class _ProductDetailedScreenState extends State<ProductDetailedScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => CartScreen(),
+                    builder: (context) =>
+                        CartScreen(productId: widget.productId),
                   ),
                 );
               },
@@ -185,43 +187,19 @@ class _ProductDetailedScreenState extends State<ProductDetailedScreen> {
                         style: ElevatedButton.styleFrom(),
                         child: Row(
                           children: [
-                            OutlinedButton.icon(
-                              style: OutlinedButton.styleFrom(),
-                              onPressed: () {
-                                print(
-                                    cartTotalScreen.map((e) => print(e.size)));
-                                if (cartTotalScreen.isEmpty) {
-                                  print('empty');
-                                  cartTotalScreen.add(
-                                    CartModel(
-                                      productName: widget.name,
-                                      brand: widget.brand,
-                                      size: size[_selectedIndex],
-                                      image: widget.imageUrl,
-                                      price: widget.price,
-                                      quantity: 1,
-                                    ),
-                                  );
-                                } else {
-                                  for (int i = 0;
-                                      i < cartTotalScreen.length;
-                                      i++) {
-                                    productNameFromList =
-                                        cartTotalScreen[i].productName;
+                            Builder(
+                              builder: (context) {
+                                return OutlinedButton.icon(
+                                  style: OutlinedButton.styleFrom(),
+                                  onPressed: () {
 
-                                    productSizeFromList =
-                                        cartTotalScreen[i].size;
 
-                                    if (widget.name ==
-                                            cartTotalScreen[i].productName &&
-                                        size[_selectedIndex] ==
-                                            cartTotalScreen[i].size) {
-                                      break;
-                                    } else if (widget.name ==
-                                            cartTotalScreen[i].productName &&
-                                        size[_selectedIndex] !=
-                                            cartTotalScreen[i].size) {
-                                      print('size different');
+                                    final snackBar = SnackBar(content: Text('Item Added to Cart'));
+                                    Scaffold.of(context).showSnackBar(snackBar);
+                                    print(
+                                        cartTotalScreen.map((e) => print(e.size)));
+                                    if (cartTotalScreen.isEmpty) {
+                                      print('empty');
                                       cartTotalScreen.add(
                                         CartModel(
                                           productName: widget.name,
@@ -232,18 +210,50 @@ class _ProductDetailedScreenState extends State<ProductDetailedScreen> {
                                           quantity: 1,
                                         ),
                                       );
-                                      break;
+                                    } else {
+                                      for (int i = 0;
+                                          i < cartTotalScreen.length;
+                                          i++) {
+                                        productNameFromList =
+                                            cartTotalScreen[i].productName;
+
+                                        productSizeFromList =
+                                            cartTotalScreen[i].size;
+
+                                        if (widget.name ==
+                                                cartTotalScreen[i].productName &&
+                                            size[_selectedIndex] ==
+                                                cartTotalScreen[i].size) {
+                                          break;
+                                        } else if (widget.name ==
+                                                cartTotalScreen[i].productName &&
+                                            size[_selectedIndex] !=
+                                                cartTotalScreen[i].size) {
+                                          print('size different');
+                                          cartTotalScreen.add(
+                                            CartModel(
+                                              productName: widget.name,
+                                              brand: widget.brand,
+                                              size: size[_selectedIndex],
+                                              image: widget.imageUrl,
+                                              price: widget.price,
+                                              quantity: 1,
+                                            ),
+                                          );
+                                          break;
+                                        }
+                                      }
                                     }
-                                  }
-                                }
-                              },
-                              icon: const Icon(Icons.shopify_outlined,
-                                  color: kBlackColor),
-                              label: const Text(
-                                'ADD TO CART',
-                                style:
-                                    TextStyle(color: kBlackColor, fontSize: 16),
-                              ),
+                                  },
+                                  icon: const Icon(Icons.shopify_outlined,
+                                      color: kBlackColor),
+                                  label: const Text(
+                                    'ADD TO CART',
+                                    style:
+                                        TextStyle(color: kBlackColor, fontSize: 16),
+                                  ),
+                                );
+                              }
                             )
                           ],
                         ),
@@ -261,7 +271,10 @@ class _ProductDetailedScreenState extends State<ProductDetailedScreen> {
                                 : Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => ListOfAddress(),
+                                      builder: (context) => ListOfAddress(
+                                        productIdValue: widget.productId,
+                                        // price: widget.price,
+                                      ),
                                     ),
                                   );
                           } else {

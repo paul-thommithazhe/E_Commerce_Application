@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:take_it_and_go/core/constants.dart';
@@ -6,41 +8,21 @@ import 'package:take_it_and_go/widgets/list_of_product.dart';
 // horizontal sliding image with title of the category of the products
 
 class SlidingMainTitle extends StatelessWidget {
-  SlidingMainTitle({Key? key}) : super(key: key);
-
-  // List<String> categoryNames = [
-  //   'Shirts',
-  //   'T-Shirts',
-  //   'Trousers',
-  //   'Jeans',
-  //   'Sports',
-  //   'Track Pants',
-  //   'Kurtas',
-  //   'Blazzers',
-  // ];
-  // List<String> slidingImages = [
-  //   'image1.jpeg',
-  //   'image2.jpeg',
-  //   'image3.jpeg',
-  //   'image4.jpeg',
-  //   'image5.jpeg',
-  //   'image6.jpeg',
-  //   'image6.jpeg',
-  // ];
+  const SlidingMainTitle({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
         stream: FirebaseFirestore.instance.collection('category').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (!snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(
                 color: kButtonandBorderColors,
               ),
             );
           }
-
+          log(snapshot.data!.docs.length.toString());
           return SizedBox(
             height: 100,
             child: ListView.builder(
@@ -54,10 +36,14 @@ class SlidingMainTitle extends StatelessWidget {
                       MaterialPageRoute(
                         //navigating to list of product items ...(eg :- shirt to list of shirt items)
 
-                        builder: (context) => ListOfProdcutScreen(
-                          categoryTitle: snapshot.data!.docs[index]['name'],
-                          // productid:snapshot.data!.doc
-                        ),
+                        builder: (context) {
+                          // print(snapshot.data!.docs[index].id);
+
+                          return ListOfProdcutScreen(
+                            categoryTitle: snapshot.data!.docs[index]['name'],
+                            productIndex: index,
+                          );
+                        },
                       ),
                     );
                   },

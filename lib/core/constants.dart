@@ -21,3 +21,9 @@ const kDivider = Divider(thickness: 2);
 //Firebase auth
 
 final FirebaseAuth auth = FirebaseAuth.instance;
+
+// stripe api keys 
+
+const stripePublishableKey = 'pk_test_51LQOawSFLCAQCxPW1SeG0WVl4v8NlZauVaZFk1gYQZrCe8Gk9louGKiFihXNTsiUCpJkjPPLxNgvHo6bC4ouDd8B00NSCwfzVm';
+
+const secretKey  =  'sk_test_51LQOawSFLCAQCxPW6PRoSnpq2nZgZzC990Y0aor9TEyLX9gsJNK2PCZCQmcTorgCRjvgXf03gmZhULaldkx5fgNA00bDuZQKfq';

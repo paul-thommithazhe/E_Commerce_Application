@@ -6,8 +6,10 @@ import 'package:take_it_and_go/core/constants.dart';
 import 'package:take_it_and_go/screens/payment/payment.dart';
 
 class ListOfAddress extends StatefulWidget {
-  ListOfAddress({Key? key}) : super(key: key);
-
+  ListOfAddress({Key? key, this.productIdValue,})
+      : super(key: key);
+  String? productIdValue;
+  // int? price;
   @override
   State<ListOfAddress> createState() => _ListOfAddressState();
 }
@@ -67,7 +69,11 @@ class _ListOfAddressState extends State<ListOfAddress> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => PaymentScreen()));
+                                      builder: (context) => PaymentScreen(
+                                            quantity: 1,
+                                            productId: widget.productIdValue!,
+                                            // price: widget.price!,
+                                          )));
                             },
                             selected: true,
                             title: Padding(
@@ -271,7 +277,8 @@ class UserAddressScreen extends StatelessWidget {
                             context,
                             //payment screen
                             MaterialPageRoute(
-                                builder: (context) => const PaymentScreen()),
+                              builder: (context) => ListOfAddress(),
+                            ),
                           );
                         },
                         style: ElevatedButton.styleFrom(

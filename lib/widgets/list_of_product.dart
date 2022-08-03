@@ -8,9 +8,11 @@ import 'package:take_it_and_go/screens/home/widgets/product_lists.dart';
 import 'package:take_it_and_go/widgets/icon_button.dart';
 
 class ListOfProdcutScreen extends StatelessWidget {
-  const ListOfProdcutScreen({Key? key, required this.categoryTitle})
+  const ListOfProdcutScreen(
+      {Key? key, required this.categoryTitle, required this.productIndex})
       : super(key: key);
   final String categoryTitle;
+  final int productIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -76,15 +78,16 @@ class ListOfProdcutScreen extends StatelessWidget {
                     crossAxisSpacing: 2,
                     itemBuilder: (context, index) {
                       return ListItem(
-                        imageUrl: snapshot.connectionState ==
-                                ConnectionState.waiting
-                            ? const Center(child: CircularProgressIndicator())
-                            : snapshot.data!.docs[index]['image'],
-                        productTitle: snapshot.data!.docs[index]['name'],
-                        productBrand: snapshot.data!.docs[index]['brand'],
-                        productPrice: snapshot.data!.docs[index]['price'],
-                        productQuantity: snapshot.data!.docs[index]['quantity'],
-                      );
+                          imageUrl: snapshot.connectionState ==
+                                  ConnectionState.waiting
+                              ? const Center(child: CircularProgressIndicator())
+                              : snapshot.data!.docs[index]['image'],
+                          productTitle: snapshot.data!.docs[index]['name'],
+                          productBrand: snapshot.data!.docs[index]['brand'],
+                          productPrice: snapshot.data!.docs[index]['price'],
+                          productQuantity: snapshot.data!.docs[index]
+                              ['quantity'],
+                          productId: snapshot.data!.docs[index].id);
                     },
                   ),
                 ),
